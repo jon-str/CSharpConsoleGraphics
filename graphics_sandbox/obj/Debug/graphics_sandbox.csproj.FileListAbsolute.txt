@@ -1,0 +1,7 @@
+C:\_M_SOURCE_\csharp-dotNET\graphics_sandbox\graphics_sandbox\graphics_sandbox\obj\Debug\graphics_sandbox.csprojResolveAssemblyReference.cache
+C:\_M_SOURCE_\csharp-dotNET\graphics_sandbox\graphics_sandbox\graphics_sandbox\obj\Debug\graphics_sandbox.csproj.CoreCompileInputs.cache
+C:\_M_SOURCE_\csharp-dotNET\graphics_sandbox\graphics_sandbox\graphics_sandbox\bin\Debug\graphics_sandbox.exe.config
+C:\_M_SOURCE_\csharp-dotNET\graphics_sandbox\graphics_sandbox\graphics_sandbox\bin\Debug\graphics_sandbox.exe
+C:\_M_SOURCE_\csharp-dotNET\graphics_sandbox\graphics_sandbox\graphics_sandbox\bin\Debug\graphics_sandbox.pdb
+C:\_M_SOURCE_\csharp-dotNET\graphics_sandbox\graphics_sandbox\graphics_sandbox\obj\Debug\graphics_sandbox.exe
+C:\_M_SOURCE_\csharp-dotNET\graphics_sandbox\graphics_sandbox\graphics_sandbox\obj\Debug\graphics_sandbox.pdb
