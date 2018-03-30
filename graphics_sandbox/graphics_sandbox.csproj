@@ -43,8 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppComponent.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="STR_Entities\Base\Extensions\STR_UpdateableEntity.cs" />
+    <Compile Include="STR_Entities\EmptyEntity.cs" />
+    <Compile Include="STR_Entities\EntityCollection.cs" />
+    <Compile Include="STR_Entities\Base\Extensions\STR_NullEntity.cs" />
+    <Compile Include="STR_Entities\Base\STR_BaseEntity.cs" />
+    <Compile Include="STR_Entities\Base\Extensions\STR_DrawableEntity.cs" />
+    <Compile Include="STR_Entities\TestEntity.cs" />
+    <Compile Include="STR_GraphicsEngine.cs" />
+    <Compile Include="STR_GraphicsLib.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
