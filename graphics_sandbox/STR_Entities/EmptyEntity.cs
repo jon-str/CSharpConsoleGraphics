@@ -11,18 +11,6 @@ namespace graphics_sandbox
         public class EmptyEntity : STR_Entities.STR_NullEntity
         {
             public EmptyEntity() : base() {; }
-
-            public override void Draw ( )
-            {
-                //should not hit
-                throw new NotImplementedException ( );
-            }
-
-            public override void Update ( )
-            {
-                //should not hit
-                throw new NotImplementedException ( );
-            }
         }
     }
 }

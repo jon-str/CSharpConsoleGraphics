@@ -20,8 +20,6 @@ namespace graphics_sandbox
                 mbIsDrawable = blIsDrawable;
                 mbIsUpdateable = blIsUpdateable;
 
-                //all drawables are updateable
-
                 mostrgeEngine = AppComponent.GraphicsEngine;
             }
 
@@ -35,7 +33,7 @@ namespace graphics_sandbox
             public bool IsDrawable { get => mbIsDrawable; }
             public bool IsUpdateable { get => mbIsUpdateable; }
 
-            protected STR_GraphicsEngine GraphicsEngine { get => ( mostrgeEngine == null ) ? throw new NullReferenceException ( "AppComponent.GraphicsEngine == null ... [oops!!!]" ) : mostrgeEngine; }
+            protected STR_GraphicsEngine GraphicsEngine { get => mostrgeEngine; }
         }
     }
 }

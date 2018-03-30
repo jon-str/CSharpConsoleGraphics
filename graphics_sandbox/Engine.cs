@@ -12,14 +12,14 @@ namespace graphics_sandbox
 
         protected System.Drawing.Graphics mogGraphics;
 
+        private STR_Entities.EntityCollection moecEntities;
+
         public void Start ( )
         {
             if ( mbIsRunning )
             {
                 return;
             }
-
-            //STR_GraphicsLib.GraphicsConfig.Initialize ( );
 
             mogGraphics = STR_GraphicsLib.GraphicsConfig.Graphics;
 
@@ -45,7 +45,13 @@ namespace graphics_sandbox
         public abstract void Run ( );
         public abstract bool Init ( );
 
-        public System.Drawing.Graphics Graphics { get => ( mogGraphics == null ) ? throw new NullReferenceException ( "Engine(instance).Graphics == null ... [oops!!!]" ) : mogGraphics; }
+        protected STR_Entities.EntityCollection Entities
+        {
+            get => moecEntities;
+            set => moecEntities = value;
+        }
+
+        public System.Drawing.Graphics Graphics { get => mogGraphics; }
 
         public bool IsRunning
         {

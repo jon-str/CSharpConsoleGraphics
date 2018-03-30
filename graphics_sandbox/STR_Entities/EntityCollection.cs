@@ -10,43 +10,41 @@ namespace graphics_sandbox
     {
         public class EntityCollection : STR_Entities.STR_BaseEntity
         {
-            private List<STR_BaseEntity> moarrstreEntites;
+            private Dictionary<string , STR_BaseEntity> modstrEntities;
 
             public EntityCollection ( ) : base ( true , true )
             {
-                moarrstreEntites = new List<STR_BaseEntity> ( );
+                modstrEntities = new Dictionary<string , STR_BaseEntity> ( );
 
-                this.Add ( new STR_Entities.EmptyEntity ( ) );
+                this.Add ( "ent_EMPTY", new STR_Entities.EmptyEntity ( ) );
             }
 
             public override void Draw ( )
             {
-                foreach ( STR_BaseEntity strE in moarrstreEntites )
+                foreach(KeyValuePair<string, STR_BaseEntity> kvp in modstrEntities)
                 {
-                    if ( !( strE.IsDrawable ) )
+                    if(!(kvp.Value.IsDrawable))
                     {
                         continue;
                     }
-
-                    strE.Draw ( );
+                    kvp.Value.Draw ( );
                 }
             }
             public override void Update ( )
             {
-                foreach ( STR_BaseEntity strE in moarrstreEntites )
+                foreach ( KeyValuePair<string , STR_BaseEntity> kvp in modstrEntities )
                 {
-                    if ( !( strE.IsUpdateable ) )
+                    if ( !( kvp.Value.IsUpdateable ) )
                     {
                         continue;
                     }
-
-                    strE.Update ( );
+                    kvp.Value.Update ( );
                 }
+
             }
 
-            public void Add ( STR_Entities.STR_BaseEntity streEntity ) => moarrstreEntites.Add ( streEntity );
-
-            public int Size { get => moarrstreEntites.Count; }
+            public void Add ( string sKey, STR_Entities.STR_BaseEntity streEntity ) => modstrEntities.Add ( sKey, streEntity );
+            public int Size { get => modstrEntities.Count; }
 
         }
     }
