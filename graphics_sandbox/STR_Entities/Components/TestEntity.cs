@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace graphics_sandbox
+namespace STR_GraphicsLib.STR_EntityComponents
 {
-    public static partial class STR_Entities
+    public static partial class STR_EntitySupport
     {
-        public class TestEntity : STR_Entities.STR_DrawableEntity
+        public class TestEntity : STR_EntitySupport.STR_DrawableEntity
         {
             public TestEntity ( ) : base ( ) {; }
 

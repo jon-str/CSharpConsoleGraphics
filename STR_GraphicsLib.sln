@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "graphics_sandbox", "graphics_sandbox\graphics_sandbox.csproj", "{3A4ABE03-C483-41FF-95DE-FA2CC57C1698}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STR_GraphicsLib", "graphics_sandbox\STR_GraphicsLib.csproj", "{3A4ABE03-C483-41FF-95DE-FA2CC57C1698}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace graphics_sandbox
+namespace STR_GraphicsLib.STR_EntityComponents
 {
-    public static partial class STR_Entities
+    public static partial class STR_EntitySupport
     {
-        public class EntityCollection : STR_Entities.STR_BaseEntity
+        public class EntityCollection : STR_EntitySupport.STR_BaseEntity
         {
             private Dictionary<string , STR_BaseEntity> modstrEntities;
 
@@ -16,7 +16,7 @@ namespace graphics_sandbox
             {
                 modstrEntities = new Dictionary<string , STR_BaseEntity> ( );
 
-                this.Add ( "ent_EMPTY", new STR_Entities.EmptyEntity ( ) );
+                this.Add ( "ent_EMPTY", new STR_EntitySupport.EmptyEntity ( ) );
             }
 
             public override void Draw ( )
@@ -43,7 +43,7 @@ namespace graphics_sandbox
 
             }
 
-            public void Add ( string sKey, STR_Entities.STR_BaseEntity streEntity ) => modstrEntities.Add ( sKey, streEntity );
+            public void Add ( string sKey, STR_EntitySupport.STR_BaseEntity streEntity ) => modstrEntities.Add ( sKey, streEntity );
             public int Size { get => modstrEntities.Count; }
 
         }

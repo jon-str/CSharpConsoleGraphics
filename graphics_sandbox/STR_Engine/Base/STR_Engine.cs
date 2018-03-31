@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace graphics_sandbox
+using STR_GraphicsLib.STR_EntityComponents;
+using STR_GraphicsLib.STR_Application.STR_ConsoleSuppport;
+
+namespace STR_GraphicsLib.STR_Engine
 {
-    public abstract class Engine
+    public abstract class STR_Engine
     {
         protected bool mbIsRunning;
 
         protected System.Drawing.Graphics mogGraphics;
 
-        private STR_Entities.EntityCollection moecEntities;
+        private STR_EntitySupport.EntityCollection moecEntities;
 
         public void Start ( )
         {
@@ -21,7 +24,7 @@ namespace graphics_sandbox
                 return;
             }
 
-            mogGraphics = STR_GraphicsLib.GraphicsConfig.Graphics;
+            mogGraphics = STR_ConsoleSupport.CONSOLE_CONFIG.Graphics;
 
             mbIsRunning = true;
 
@@ -45,7 +48,7 @@ namespace graphics_sandbox
         public abstract void Run ( );
         public abstract bool Init ( );
 
-        protected STR_Entities.EntityCollection Entities
+        protected STR_EntitySupport.EntityCollection Entities
         {
             get => moecEntities;
             set => moecEntities = value;

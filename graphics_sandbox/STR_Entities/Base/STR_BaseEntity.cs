@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace graphics_sandbox
+using STR_GraphicsLib.STR_Engine;
+using STR_GraphicsLib.STR_Application;
+
+namespace STR_GraphicsLib.STR_EntityComponents
 {
-    public static partial class STR_Entities
+    public static partial class STR_EntitySupport
     {
         public abstract class STR_BaseEntity
         {
@@ -20,7 +23,7 @@ namespace graphics_sandbox
                 mbIsDrawable = blIsDrawable;
                 mbIsUpdateable = blIsUpdateable;
 
-                mostrgeEngine = AppComponent.GraphicsEngine;
+                mostrgeEngine = STR_Application.STR_Application.GraphicsEngine;
             }
 
             public STR_BaseEntity ( bool blIsDrawable ) : this ( blIsDrawable , ( blIsDrawable == true ) ? true : false ) {; }

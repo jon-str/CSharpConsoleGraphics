@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace graphics_sandbox
+using STR_GraphicsLib.STR_EntityComponents;
+
+namespace STR_GraphicsLib.STR_Engine
 {
-    public class STR_GraphicsEngine : Engine
+    public class STR_GraphicsEngine : STR_Engine
     {
         // - WILL ACTUALLY IMPLEMENT
         //private STR_Window mowWindow;
@@ -21,8 +23,8 @@ namespace graphics_sandbox
 
         public override bool Init ( )
         {
-            this.Entities = new STR_Entities.EntityCollection ( );
-            this.Entities.Add ("en_TEST_ENTITY",  new STR_Entities.TestEntity ( ) );
+            this.Entities = new STR_EntitySupport.EntityCollection ( );
+            this.Entities.Add ("en_TEST_ENTITY",  new STR_EntitySupport.TestEntity ( ) );
 
             return ( this.Entities.Size > 0 ) ? true : false;
         }

@@ -7,14 +7,16 @@ using System.Text;
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace graphics_sandbox
+using STR_GraphicsLib.STR_Application;
+
+namespace STR_GraphicsLib_TEST
 {
     public class Program
     {
 
         static void Main ( )
         { 
-            AppComponent.GraphicsEngine.Start ( );
+            STR_Application.GraphicsEngine.Start ( );
         }
     }
 }

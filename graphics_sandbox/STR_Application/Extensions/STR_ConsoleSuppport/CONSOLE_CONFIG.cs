@@ -7,11 +7,13 @@ using System.Text;
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace graphics_sandbox
+using STR_GraphicsLib.STR_Engine;
+
+namespace STR_GraphicsLib.STR_Application.STR_ConsoleSuppport
 {
-    public static partial class STR_GraphicsLib
+    public static partial class STR_ConsoleSupport
     {
-        public static class GraphicsConfig
+        public static class CONSOLE_CONFIG
         {
             private static bool                             mbIsInitialized = false;
 
@@ -22,22 +24,18 @@ namespace graphics_sandbox
 
             public static readonly Process                  mopProcess;
 
-            internal static class NativeMethods
-            {
-                [DllImport ( "user32.dll" , CharSet = CharSet.Auto )]
-                public static extern IntPtr GetDC ( IntPtr hWnd );
-            }
 
-            static GraphicsConfig()
+
+            static CONSOLE_CONFIG()
             {
                 if(mbIsInitialized)
                 {
                     return;
                 }
 
-                STR_GraphicsLib.GraphicsConfig.mopProcess = Process.GetCurrentProcess ( );
+                STR_ConsoleSupport.CONSOLE_CONFIG.mopProcess = Process.GetCurrentProcess ( );
 
-                STR_GraphicsLib.GraphicsConfig.mogGraphics = Graphics.FromHdc ( NativeMethods.GetDC ( STR_GraphicsLib.GraphicsConfig.mopProcess.MainWindowHandle ) );
+                STR_ConsoleSupport.CONSOLE_CONFIG.mogGraphics = Graphics.FromHdc ( STR_ConsoleSupport.NATIVE_METHODS.GetDC ( STR_ConsoleSupport.CONSOLE_CONFIG.mopProcess.MainWindowHandle ) );
 
                 Console.CursorVisible = false;
 

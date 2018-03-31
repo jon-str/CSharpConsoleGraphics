@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace graphics_sandbox
+namespace STR_GraphicsLib.STR_EntityComponents
 {
-    public static partial class STR_Entities
+    public static partial class STR_EntitySupport
     {
-        public abstract class STR_NullEntity : STR_Entities.STR_BaseEntity
+        public abstract class STR_NullEntity : STR_EntitySupport.STR_BaseEntity
         {
             public STR_NullEntity ( ) : base ( ) {; }
 
