@@ -32,15 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="STR_Application\Base\STR_Application.cs" />
@@ -55,6 +62,7 @@
     <Compile Include="Base\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="STR_Engine\Extensions\STR_StopwatchExtensions.cs" />
+    <Compile Include="STR_Entities\Components\FastDrawableEntity.cs" />
     <Compile Include="STR_Entities\Extensions\STR_UpdateableEntity.cs" />
     <Compile Include="STR_Entities\Components\EmptyEntity.cs" />
     <Compile Include="STR_Entities\Components\EntityCollection.cs" />
@@ -65,6 +73,7 @@
     <Compile Include="STR_Engine\Components\STR_GraphicsEngine.cs" />
     <Compile Include="STR_Application\Extensions\STR_ConsoleSuppport\CONSOLE_CONFIG.cs" />
     <Compile Include="STR_Engine\Components\TestEngine.cs" />
+    <Compile Include="STR_Entities\Extensions\STR_WriteableBitmapExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

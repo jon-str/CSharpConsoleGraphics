@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,139 +14,86 @@ namespace STR_GraphicsLib.STR_EntityComponents
     {
         public class TestEntity : STR_EntitySupport.STR_DrawableEntity
         {
-            private Bitmap mbmPixelMap1;
+            private byte [ ] byarrPixelBuffer;
 
-            private Bitmap mbmPixelMap2;
+            private const int mciPixelBufferStride = 4;
 
-            private static Bitmap mbmBlackPixelMap;
+            private const int mciWidth = 480;
+            private const int mciHeight = 480;
 
-            int delta = 10;
+            private const int mciPixelBufferSize = mciWidth * mciHeight * mciPixelBufferStride;
+
+            private int miDelta;
+
+            private Bitmap mbmBitmap;
+            private Rectangle mrScreenRect;
 
             private Random rnd;
 
-            private enum BufferIndex
-            {
-                MAP_1 = 0
-                , MAP_2 = 1
-            }
-
-            private BufferIndex mebiCurrentIndex;
-
             public TestEntity ( ) : base ( )
             {
-                mbmBlackPixelMap = new Bitmap ( 640 , 480 , PixelFormat.Format24bppRgb );
-                Clear ( ref mbmBlackPixelMap );
-
-                mbmPixelMap1 = new Bitmap ( 640 , 480 , PixelFormat.Format24bppRgb );
-                mbmPixelMap2 = new Bitmap ( 640 , 480 , PixelFormat.Format24bppRgb );
-
-                ClearPixelMaps ( );
-
-                mebiCurrentIndex = BufferIndex.MAP_1;
-
+                byarrPixelBuffer = Enumerable.Repeat<byte> ( (byte) 0x00, mciPixelBufferSize ).ToArray();
+                miDelta = 10;
                 rnd = new Random ( );
-            }
 
-            private Bitmap GetBufferToDraw ( )
-            {
-                switch ( mebiCurrentIndex )
-                {
-                    case BufferIndex.MAP_1:
-                        mbmPixelMap1 = mbmBlackPixelMap;
-
-                        mebiCurrentIndex = BufferIndex.MAP_2;
-                        return mbmPixelMap2;
-
-                    case BufferIndex.MAP_2:
-                        mbmPixelMap2 = mbmBlackPixelMap;
-
-                        mebiCurrentIndex = BufferIndex.MAP_1;
-                        return mbmPixelMap1;
-
-                    default:
-                        throw new IndexOutOfRangeException ( "Tried to access unavailable buffer" );
-                }
-            }
-
-            private void Fill ( int iColorHexValue , ref Bitmap rbmBitmapToFill )
-            {
-                for ( int y = 0 ; y < rbmBitmapToFill.Height ; y++ )
-                {
-                    for ( int x = 0 ; x < rbmBitmapToFill.Width ; x++ )
-                    {
-                        Color cColor = Color.FromArgb ( iColorHexValue );
-
-                        rbmBitmapToFill.SetPixel ( x , y , cColor );
-                    }
-                }
-            }
-
-            private void Fill ( Color cColor , ref Bitmap rbmBitmapToFill )
-            {
-                for ( int y = 0 ; y < rbmBitmapToFill.Height ; y++ )
-                {
-                    for ( int x = 0 ; x < rbmBitmapToFill.Width ; x++ )
-                    {
-                        rbmBitmapToFill.SetPixel ( x , y , cColor );
-                    }
-                }
-            }
-
-            private void Clear ( ref Bitmap rbmBitmapToClear )
-            {
-                this.Fill ( Color.Black , ref rbmBitmapToClear );
-            }
-
-            private void ClearPixelMaps ( )
-            {
-                this.Fill ( Color.Black , ref mbmPixelMap1 );
-                this.Fill ( Color.Black , ref mbmPixelMap2 );
+                mbmBitmap = new Bitmap ( mciWidth , mciHeight );
+                mrScreenRect = new Rectangle ( 0 , 0 , mbmBitmap.Width , mbmBitmap.Height );
             }
 
             public override void Draw ( )
             {
                 //this.GraphicsEngine.Graphics.FillRectangle ( Brushes.Blue , 10 , 10 , 310 , 180 );
 
+                BitmapData bmdRawData = mbmBitmap.LockBits ( mrScreenRect , ImageLockMode.ReadWrite , PixelFormat.Format32bppArgb );
+                IntPtr iPtr = bmdRawData.Scan0;
 
+                int iBytes = Math.Abs ( bmdRawData.Stride ) * bmdRawData.Height;
+                int iTest = byarrPixelBuffer.Length;
+                { };
 
-                Bitmap bmPixelBuffer = GetBufferToDraw ( );
-                for ( int y = 0 ; y < bmPixelBuffer.Height ; y++ )
+                Marshal.Copy(iPtr, byarrPixelBuffer, 0, byarrPixelBuffer.Length);
+
+                for ( int y = 0 ; y < mciHeight ; y++ )
                 {
-                    for ( int x = 0 ; x < bmPixelBuffer.Width ; x++ )
+                    for ( int x = 0 ; x < mciWidth ; x++ )
                     {
-                        //int iPixelIndex = ( y * bmPixelBuffer.Width + x );
+                        int iPixelIndex = ( y * mciWidth + x ) * 4;
 
-                        byte bR = ( byte ) ( ( ( x + delta ) % 0x100 ) ^ ( ( y + delta ) % 0x100 ) );
-                        byte bG = ( byte ) ( ( ( 2 * x + delta ) % 0x100 ) ^ ( ( 2 * y + delta ) % 0x100 ) );
-                        byte bB = ( byte ) ( ( ( 50 + ( rnd.Next ( ) * 100 ) ) ) % 100 );
+                        byte byR = ( byte ) ( ( ( x + miDelta ) % 0x100 ) ^ ( ( y + miDelta ) % 0x100 ) );
+                        byte byG = ( byte ) ( ( ( 2 * x + miDelta ) % 0x100 ) ^ ( ( 2 * y + miDelta ) % 0x100 ) );
+                        byte byB = ( byte ) ( ( ( 50 + ( rnd.Next ( ) * 100 ) ) ) % 0x100 );
 
-                        bB = ( byte ) ( ( bB + delta ) % 0x100 );
+                        byB = ( byte ) ( ( byB + miDelta ) % 0x100 );
 
-                        bmPixelBuffer.SetPixel ( x , y , ColorFromPackage ( bR , bG , bB ) );
+                        byarrPixelBuffer [ iPixelIndex ] = byR;
+                        byarrPixelBuffer [ iPixelIndex + 1] = byG;
+                        byarrPixelBuffer [ iPixelIndex + 2] = byB;
+                        byarrPixelBuffer [ iPixelIndex + 3] = 0xFF;
                     }
                 }
 
-                Image oiImage = bmPixelBuffer;
 
-                this.GraphicsEngine.Graphics.DrawImage ( oiImage , 0 , 0 , 640 , 480 );
-            }
+                Marshal.Copy ( byarrPixelBuffer , 0 , iPtr, byarrPixelBuffer.Length );
 
-            private Color ColorFromPackage(byte bR, byte bG, byte bB)
-            {
-                return Color.FromArgb ( PackColor ( bR , bG , bB ));
-            }
+                mbmBitmap.UnlockBits ( bmdRawData );
 
-            private int PackColor ( byte bR , byte bG , byte bB )
-            {
-                int iTest = ( ( 0xFF << 24 ) | ( bR << 16 ) | ( bG << 8 ) | bB );
-                { };
 
-                return ( ( 0xFF << 24 ) | ( bR << 16 ) | ( bG << 8 ) | bB );
+                this.GraphicsEngine.Graphics.  DrawImage ( mbmBitmap , 0 , 0 , mciWidth , mciHeight );
             }
 
             public override void Update ( )
             {
-                return;
+                miDelta = (miDelta >= 0x100) ? 0 : miDelta + 1;
+                
+            }
+
+            public static Image ImageFromByteArray ( byte [ ] byarrSource )
+            {
+                using ( MemoryStream oMemStream = new MemoryStream ( byarrSource ) )
+                {
+                    return new Bitmap(oMemStream);
+                }
+
             }
         }
     }
