@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using STR_GraphicsLib.STR_Engine;
-using STR_GraphicsLib.STR_Application;
+using STR_GraphicsLib.STR_ApplicationSupport;
 
 namespace STR_GraphicsLib.STR_EntityComponents
 {
@@ -23,7 +23,7 @@ namespace STR_GraphicsLib.STR_EntityComponents
                 mbIsDrawable = blIsDrawable;
                 mbIsUpdateable = blIsUpdateable;
 
-                mostrgeEngine = STR_Application.STR_Application.GraphicsEngine;
+                mostrgeEngine = STR_ApplicationSupport.STR_Application.GraphicsEngine;
             }
 
             public STR_BaseEntity ( bool blIsDrawable ) : this ( blIsDrawable , ( blIsDrawable == true ) ? true : false ) {; }

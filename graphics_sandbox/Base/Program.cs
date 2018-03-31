@@ -7,7 +7,7 @@ using System.Text;
 using System.Drawing;
 using System.Threading.Tasks;
 
-using STR_GraphicsLib.STR_Application;
+using STR_GraphicsLib.STR_ApplicationSupport;
 
 namespace STR_GraphicsLib_TEST
 {

@@ -8,20 +8,23 @@ using System.Threading.Tasks;
 using STR_GraphicsLib.STR_EntityComponents;
 using System.Diagnostics;
 using System.Threading;
+using STR_GraphicsLib.STR_ApplicationSupport;
+using STR_GraphicsLib.STR_ApplicationSupport.STR_ConsoleSuppport;
 
 namespace STR_GraphicsLib.STR_Engine
 {
     public class STR_GraphicsEngine : STR_Engine
     {
-        // - WILL ACTUALLY IMPLEMENT
-        //private STR_Window mowWindow;
+        private STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG monccConsoleConfig;
 
-        public STR_GraphicsEngine () : this (0, 0) { }
+        //public STR_GraphicsEngine () : this (string.Empty, 0, 0) { }
 
-        public STR_GraphicsEngine(int iWindowWidth, int iWindowHeight)
+        public STR_GraphicsEngine(string sWindowTitle , int iWindowWidthPx, int iWindowHeightPx)
         {
-            //moWindow = new STR_Window ( iWindowWidth , iWindowHeight );
+            monccConsoleConfig = new STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG ( sWindowTitle , iWindowWidthPx , iWindowHeightPx, false );
         }
+
+        public STR_GraphicsEngine ( STR_ConfigPackage strcpConfigPackage ) : this ( strcpConfigPackage.WindowTitle , strcpConfigPackage.WindowWidthPx , strcpConfigPackage.WindowHeightPx ) {; }
 
         public override bool Init ( )
         {
@@ -29,6 +32,13 @@ namespace STR_GraphicsLib.STR_Engine
             this.Entities.Add ("en_TEST_ENTITY",  new STR_EntitySupport.TestEntity ( ) );
 
             return ( this.Entities.Size > 0 ) ? true : false;
+        }
+
+        public override STR_Window AttachWindow ( )
+        {
+            mstrWindow = new STR_ConsoleWindow ( ( STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG) monccConsoleConfig.Apply() );
+            return mstrWindow;
+            //mogGraphics = mstrWindow.GraphicsContext;
         }
 
         public override void Run ( )

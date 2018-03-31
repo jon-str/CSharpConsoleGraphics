@@ -78,7 +78,7 @@ namespace STR_GraphicsLib.STR_EntityComponents
                 mbmBitmap.UnlockBits ( bmdRawData );
 
 
-                this.GraphicsEngine.Graphics.  DrawImage ( mbmBitmap , 0 , 0 , mciWidth , mciHeight );
+                this.GraphicsEngine.AttachedWindow.GraphicsContext.DrawImage ( mbmBitmap , 0 , 0 , mciWidth , mciHeight );
             }
 
             public override void Update ( )

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 using STR_GraphicsLib.STR_Engine;
 
-namespace STR_GraphicsLib.STR_Application
+namespace STR_GraphicsLib.STR_ApplicationSupport
 {
     public static class STR_Application
     {
         private static STR_GraphicsEngine mstrgeEngine;
         public static STR_GraphicsEngine GraphicsEngine { get => mstrgeEngine; }
 
-        static STR_Application ( ) => mstrgeEngine = new STR_GraphicsEngine ( );
+        static STR_Application ( ) => mstrgeEngine = new STR_GraphicsEngine ( new STR_ConfigPackage ( "TEST" , 500 , 500 ) );
     }
 }

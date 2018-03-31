@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 using STR_GraphicsLib.STR_EntityComponents;
-using STR_GraphicsLib.STR_Application.STR_ConsoleSuppport;
+using STR_GraphicsLib.STR_ApplicationSupport;
+using STR_GraphicsLib.STR_ApplicationSupport.STR_ConsoleSuppport;
+
 
 namespace STR_GraphicsLib.STR_Engine
 {
     public abstract class STR_Engine
     {
-        protected bool mbIsRunning;
+        protected bool          mbIsRunning = false;
+        protected STR_Window    mstrWindow  = null;
 
-        protected System.Drawing.Graphics mogGraphics;
-
-        private STR_EntitySupport.EntityCollection moecEntities;
+        private STR_EntitySupport.EntityCollection moecEntities = null;
 
         public void Start ( )
         {
@@ -23,8 +24,9 @@ namespace STR_GraphicsLib.STR_Engine
             {
                 return;
             }
+            //STR_ConsoleSupport.NATIVE_CONSOLE.SetWindowSize ( 1024 , 768 );
 
-            mogGraphics = STR_ConsoleSupport.CONSOLE_CONFIG.Graphics;
+            this.AttachWindow ( );
 
             mbIsRunning = true;
 
@@ -48,13 +50,15 @@ namespace STR_GraphicsLib.STR_Engine
         public abstract void Run ( );
         public abstract bool Init ( );
 
+        public abstract STR_Window AttachWindow ( );
+
+        public STR_Window AttachedWindow { get => mstrWindow;  }
+
         protected STR_EntitySupport.EntityCollection Entities
         {
             get => moecEntities;
             set => moecEntities = value;
         }
-
-        public System.Drawing.Graphics Graphics { get => mogGraphics; }
 
         public bool IsRunning
         {

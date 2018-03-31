@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using STR_GraphicsLib.STR_Application.STR_ConsoleSuppport;
+using STR_GraphicsLib.STR_ApplicationSupport;
+using STR_GraphicsLib.STR_ApplicationSupport.STR_ConsoleSuppport;
 
 namespace STR_GraphicsLib.STR_Engine
 {
@@ -51,6 +51,11 @@ namespace STR_GraphicsLib.STR_Engine
             mhConsoleErr = STR_ConsoleSupport.NATIVE_METHODS.GetStdHandle ( STR_ConsoleSupport.NATIVE_FLAGS.STD_ERROR_HANDLE );
 
             msAppName = "Test Engine";
+        }
+
+        public override STR_Window AttachWindow ( )
+        {
+            throw new NotImplementedException ( );
         }
 
         #endregion

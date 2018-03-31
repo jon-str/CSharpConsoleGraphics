@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace STR_GraphicsLib.STR_Application.STR_ConsoleSuppport
+namespace STR_GraphicsLib.STR_ApplicationSupport.STR_ConsoleSuppport
 {
     public static partial class STR_ConsoleSupport
     {
