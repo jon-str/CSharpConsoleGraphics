@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using STR_GraphicsLib.STR_EntityComponents;
+using System.Diagnostics;
+using System.Threading;
 
 namespace STR_GraphicsLib.STR_Engine
 {
@@ -31,11 +33,64 @@ namespace STR_GraphicsLib.STR_Engine
 
         public override void Run ( )
         {
+            Stopwatch oStopwatch = new Stopwatch ( );
+            oStopwatch.Start ( );
+
+            int iFrames = 0;
+
+            double dUnprocessedSeconds = 0;
+
+            long lLastTime = oStopwatch.ElapsedNanoSeconds ( );
+
+            double dSecondsPerTick = 1 / 60.0;
+
+            int iTickCount = 0;
+
             while(this.IsRunning)
             {
-                this.Entities.Update ( );
-                this.Entities.Draw ( );
+                long lNow = oStopwatch.ElapsedNanoSeconds (  );
+                long lPassedTime = lNow - lLastTime;
+                lLastTime = lNow;
+
+                if(lPassedTime < 0)
+                {
+                    lPassedTime = 0;
+                }
+
+                if ( lPassedTime > 100000000 )
+                {
+                    lPassedTime = 100000000;
+                }
+
+                dUnprocessedSeconds += lPassedTime / 1000000000.0;
+                bool blTicked = false;
+
+                while(dUnprocessedSeconds > dSecondsPerTick)
+                {
+                    this.Entities.Update ( );
+
+                    dUnprocessedSeconds -= dSecondsPerTick;
+                    blTicked = true;
+                    iTickCount++;
+
+                    if((iTickCount % 60) == 0)
+                    {
+                        Debug.WriteLine ( string.Format ( "FPS: {0}" , iFrames ));
+                        lLastTime -= 1000;
+                        iFrames = 0;
+                    }
+                }
+
+                if(blTicked)
+                {
+                    this.Entities.Draw ( );
+                    iFrames++;
+                }
+                else
+                {
+                    Thread.Sleep ( 1 );
+                }               
             }
-        }
+        }   
     }
 }
