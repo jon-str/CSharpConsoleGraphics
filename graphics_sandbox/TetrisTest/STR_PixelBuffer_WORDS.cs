@@ -8,6 +8,6 @@ namespace STR_Games.TetrisTest
 {
     class STR_PixelBuffer_WORDS : STR_PixelBuffer_GEN<short>
     {
-        public STR_PixelBuffer_WORDS ( int iWidthPx , int iHeightPx ) : base ( iWidthPx , iHeightPx ) {; }
+        public STR_PixelBuffer_WORDS ( int iWidthPx , int iHeightPx ) : base ( iWidthPx , iHeightPx, 8 ) {; }
     }
 }

@@ -12,9 +12,12 @@ namespace STR_GraphicsLib.STR_EntityComponents
 {
     public static partial class STR_EntitySupport
     {
-        public class NewDrawableEntity : STR_EntitySupport.STR_DrawableEntity
+        public class SlowDrawableEntity : STR_EntitySupport.STR_DrawableEntity
         {
-            public NewDrawableEntity() : base() {; }
+            private const int mciWidthPx = 480;
+            private const int mciHeightPx = mciWidthPx;
+
+            public SlowDrawableEntity() : base( mciWidthPx , mciWidthPx) {; }
 
             public override void Draw ( )
             {
@@ -52,6 +55,8 @@ namespace STR_GraphicsLib.STR_EntityComponents
 
                 this.GraphicsEngine.Window.GraphicsContext.DrawImage ( mbmBitmap , 0 , 0 , mstrbmCanvas.WidthPx , mstrbmCanvas.HeightPx );
             }
+
+            public override void Update ( ) => miDelta = ( miDelta >= 0x100 ) ? 0x00 : miDelta + 1;
         }
 
     }

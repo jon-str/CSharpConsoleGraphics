@@ -14,15 +14,17 @@ namespace STR_Games.TetrisTest
     {
         protected T [ ] m_gen_arr_Pixels;
 
-        protected int miTotalPixels;
+        protected int miPixelBufferSize;
 
         protected int miStride;
 
-        public STR_PixelBuffer_GEN ( int iWidthPx , int iHeightPx )
-        {
-            miTotalPixels = iWidthPx * iHeightPx;
+        //public STR_PixelBuffer_GEN ( int iWidthPx , int iHeightPx ) : this ( iWidthPx , iHeightPx , 1 ) {; }
 
-            new STR_PixelBuffer_GEN<T> ( miTotalPixels );
+        public STR_PixelBuffer_GEN ( int iWidthPx , int iHeightPx, int iStride )
+        {
+            miPixelBufferSize = iWidthPx * iHeightPx * iStride;
+
+            new STR_PixelBuffer_GEN<T> ( miPixelBufferSize );
             //m_gen_arr_Pixels = new T [ miTotalPixels ];
 
             //m_gen_arr_Pixels = Enumerable.Repeat<T> ( STR_Utilities.GenericTypeConverter<T , uint> ( ( uint ) COLORS.BLACK ) , miTotalPixels ).ToArray<T> ( );
@@ -32,9 +34,9 @@ namespace STR_Games.TetrisTest
 
         public STR_PixelBuffer_GEN ( int iPixelBufferSize )
         {
-            miTotalPixels = iPixelBufferSize;
+            miPixelBufferSize = iPixelBufferSize;
 
-            m_gen_arr_Pixels = new T [ miTotalPixels ];
+            m_gen_arr_Pixels = new T [ miPixelBufferSize ];
 
             FillBlack ( );
 
@@ -45,7 +47,7 @@ namespace STR_Games.TetrisTest
         {
             int iColor = STR_Utilities.GenericTypeConverter<int , T> ( gen_ColorHexValue );
 
-            m_gen_arr_Pixels = Enumerable.Repeat<T> ( STR_Utilities.GenericTypeConverter<T , int> ( iColor ) , miTotalPixels ).ToArray<T> ( );
+            m_gen_arr_Pixels = Enumerable.Repeat<T> ( STR_Utilities.GenericTypeConverter<T , int> ( iColor ) , miPixelBufferSize ).ToArray<T> ( );
 
             //for ( int i = 0 ; i < miTotalPixels ; i++ )
             //{
@@ -83,6 +85,6 @@ namespace STR_Games.TetrisTest
 
         public T [ ] Array { get => m_gen_arr_Pixels; }
 
-        public int TotalPixels { get => miTotalPixels; }
+        public int Size { get => miPixelBufferSize; }
     }
 }

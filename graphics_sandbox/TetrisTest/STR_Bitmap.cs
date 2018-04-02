@@ -20,15 +20,16 @@ namespace STR_Games.TetrisTest
 
         protected STR_PixelBuffer_GEN<T> m_strpb_gen_PixelBuffer;
 
-        public STR_Bitmap ( int iWidthPx , int iHeightPx )
+        public STR_Bitmap ( int iWidthPx , int iHeightPx ) : this ( iWidthPx , iHeightPx , 1 ) {; }
+
+        public STR_Bitmap ( int iWidthPx , int iHeightPx , int iStride )
         {
             miWidthPx = iWidthPx;
             miHeightPx = iHeightPx;
 
-            miTotalPixels = miWidthPx * miHeightPx;
+            miTotalPixels = miWidthPx * miHeightPx * iStride;
 
-            m_strpb_gen_PixelBuffer = new STR_PixelBuffer_GEN<T> ( iWidthPx , iHeightPx );
-
+            m_strpb_gen_PixelBuffer = new STR_PixelBuffer_GEN<T> ( miTotalPixels );
         }
 
         public STR_Bitmap ( STR_Engine streEngine , int iBufferSize )
@@ -36,15 +37,9 @@ namespace STR_Games.TetrisTest
             miWidthPx = streEngine.Window.WidthPx;
             miHeightPx = streEngine.Window.HeightPx;
 
-            //if ( iBufferSize != ( miWidthPx * miHeightPx ) ) 
-            //{
-            //    throw new Exception ( "TODO:MESSAGE" );
-            //}
-
             miTotalPixels = iBufferSize;
 
             m_strpb_gen_PixelBuffer = new STR_PixelBuffer_GEN<T> ( iBufferSize );
-
         }
 
         public STR_Bitmap ( STR_Bitmap<T> strbmBitmap )
@@ -198,7 +193,7 @@ namespace STR_Games.TetrisTest
             }
         }
 
-        public T[] BufferArray { get => m_strpb_gen_PixelBuffer.Array; }
+        public T [ ] BufferArray { get => m_strpb_gen_PixelBuffer.Array; }
 
         public STR_PixelBuffer_GEN<T> BufferObject { get => m_strpb_gen_PixelBuffer; }
 

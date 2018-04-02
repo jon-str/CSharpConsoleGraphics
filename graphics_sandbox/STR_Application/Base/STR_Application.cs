@@ -13,6 +13,6 @@ namespace STR_GraphicsLib.STR_ApplicationSupport
         private static STR_GraphicsEngine mstrgeEngine;
         public static STR_GraphicsEngine GraphicsEngine { get => mstrgeEngine; }
 
-        static STR_Application ( ) => mstrgeEngine = new STR_GraphicsEngine ( new STR_ConfigPackage ( "TEST" , 500 , 500 ) );
+        static STR_Application ( ) => mstrgeEngine = new STR_GraphicsEngine ( new STR_ConfigPackage ( "TEST" , 800 , 800 ) );
     }
 }

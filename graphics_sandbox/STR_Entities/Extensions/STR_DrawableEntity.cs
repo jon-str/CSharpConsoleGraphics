@@ -15,7 +15,8 @@ namespace STR_GraphicsLib.STR_EntityComponents
         {
             protected STR_Bitmap<byte> mstrbmCanvas;
 
-            protected const int mciPixelBufferStride = 4;
+            //BYTE STRIDE, 4 BYTES PER DWORD
+            protected const int mciBufferByteStride = 4;
 
             protected int miPixelBufferSize;
 
@@ -26,25 +27,21 @@ namespace STR_GraphicsLib.STR_EntityComponents
 
             protected Random mRandom;
 
-            public STR_DrawableEntity ( ) : base ( true , true )
-            {
-                miPixelBufferSize = this.GraphicsEngine.Window.WidthPx * this.GraphicsEngine.Window.HeightPx * mciPixelBufferStride;
+            public STR_DrawableEntity ( int iWidthPx , int iHeightPx) : this(iWidthPx, iHeightPx, mciBufferByteStride) {; }
 
-                mstrbmCanvas = new STR_Bitmap<byte> ( this.GraphicsEngine , miPixelBufferSize );
+            public STR_DrawableEntity ( int iWidthPx , int iHeightPx, int iStride ) : base ( true , true )
+            {
+                miPixelBufferSize = iWidthPx * iHeightPx * iStride;
+
+                mstrbmCanvas = new STR_Bitmap<byte> ( iWidthPx , iHeightPx , mciBufferByteStride );
                 mbmBitmap = new Bitmap ( mstrbmCanvas.WidthPx , mstrbmCanvas.HeightPx );
                 mrScreenRect = new Rectangle ( 0 , 0 , mbmBitmap.Width , mbmBitmap.Height );
 
                 miDelta = 10;
                 mRandom = new Random ( );
             }
-
-            public override void Update ( )
-            {
-                miDelta = ( miDelta >= 0x100 ) ? 0x00 : miDelta + 1;
-            }
-
-            public STR_Bitmap<byte> Canvas { get => mstrbmCanvas; }
-            public Bitmap Map { get => mbmBitmap; }
+            //public STR_Bitmap<byte> Canvas { get => mstrbmCanvas; }
+            //public Bitmap Map { get => mbmBitmap; }
         }
     }
 }

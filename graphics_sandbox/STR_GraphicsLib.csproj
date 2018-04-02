@@ -71,15 +71,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="STR_Engine\Base\STR_DefaultEngineConfig.cs" />
     <Compile Include="STR_Engine\Extensions\STR_StopwatchExtensions.cs" />
-    <Compile Include="STR_Entities\Components\FastDrawableEntity.cs" />
-    <Compile Include="STR_Entities\Components\NewDrawableEntity.cs" />
+    <Compile Include="STR_Entities\Components\SlowDrawableEntity.cs" />
     <Compile Include="STR_Entities\Extensions\STR_UpdateableEntity.cs" />
     <Compile Include="STR_Entities\Components\EmptyEntity.cs" />
     <Compile Include="STR_Entities\Components\EntityCollection.cs" />
     <Compile Include="STR_Entities\Extensions\STR_NullEntity.cs" />
     <Compile Include="STR_Entities\Base\STR_BaseEntity.cs" />
     <Compile Include="STR_Entities\Extensions\STR_DrawableEntity.cs" />
-    <Compile Include="STR_Entities\Components\TestEntity.cs" />
+    <Compile Include="STR_Entities\Components\FastDrawableEntity.cs" />
     <Compile Include="STR_Engine\Components\STR_GraphicsEngine.cs" />
     <Compile Include="STR_Application\Extensions\STR_ConsoleSuppport\NATIVE_CONSOLE_CONFIG.cs" />
     <Compile Include="STR_Engine\Components\TestEngine.cs" />
