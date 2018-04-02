@@ -8,7 +8,7 @@ using STR_GraphicsLib.STR_Engine;
 
 namespace STR_GraphicsLib.STR_ApplicationSupport
 {
-    public class STR_ConsoleConfigPackage : STR_ConfigPackage
+    public class STR_ConsoleConfigPackage : STR_ApplicationConfig
     {
         protected int miWindowWidthColumns = 0;
         protected int miWindowHeightRows = 0;
@@ -29,6 +29,16 @@ namespace STR_GraphicsLib.STR_ApplicationSupport
         {
             get => miWindowHeightRows;
             set => miWindowHeightRows = value;
+        }
+
+        public override STR_ApplicationConfig Apply ( )
+        {
+            throw new NotImplementedException ( );
+        }
+
+        public override STR_ApplicationConfig Apply ( STR_ApplicationConfig stragConfig )
+        {
+            throw new NotImplementedException ( );
         }
     }
 }

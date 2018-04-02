@@ -107,7 +107,7 @@ namespace STR_GraphicsLib.STR_ApplicationSupport.STR_ConsoleSuppport
 
                 int iNewWindowWidthColumn = Convert.ToInt32 ( ( float ) Math.Floor ( ( decimal ) ( Console.LargestWindowWidth * ( miWindowWidthPx / 1920f ) ) ) );
                 int iNewWindowHeightRows = Convert.ToInt32 ( ( ( float ) Math.Floor ( ( decimal ) ( Console.LargestWindowHeight * ( miWindowHeightPx / 1080f ) ) ) ) );// ) > Console.LargestWindowHeight ? Console.LargestWindowHeight : ( Console.LargestWindowHeight * ( iWindowHeightPx / 1080 ) );
-                { }
+
                 Console.WindowWidth = iNewWindowWidthColumn > Console.LargestWindowWidth ? Console.LargestWindowWidth : iNewWindowWidthColumn;
                 Console.WindowHeight = iNewWindowHeightRows > Console.LargestWindowHeight ? Console.LargestWindowHeight : iNewWindowHeightRows;
 

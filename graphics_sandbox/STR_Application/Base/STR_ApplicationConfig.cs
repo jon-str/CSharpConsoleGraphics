@@ -12,12 +12,9 @@ namespace STR_GraphicsLib.STR_ApplicationSupport
     {
         protected bool mbHasBeenApplied = false;
 
-        protected STR_ApplicationConfig ( string sWindowTitle , int iWidth , int iHeight ) : base ( sWindowTitle, iWidth, iHeight)
-        {
-            mbHasBeenApplied = false;
-        }
+        protected STR_ApplicationConfig ( string sWindowTitle , int iWidth , int iHeight ) : base ( sWindowTitle, iWidth, iHeight) => mbHasBeenApplied = false;
 
-        public STR_ApplicationConfig(STR_ConfigPackage strcpConfigPackage) : this (strcpConfigPackage.WindowTitle, strcpConfigPackage.WindowWidthPx , strcpConfigPackage.WindowHeightPx) {; }
+        public STR_ApplicationConfig(STR_ConfigPackage strcpConfigPackage) : this (strcpConfigPackage.Title, strcpConfigPackage.WidthPx , strcpConfigPackage.HeightPx) {; }
 
         public abstract STR_ApplicationConfig Apply ( );
         public abstract STR_ApplicationConfig Apply ( STR_ApplicationConfig stragConfig );

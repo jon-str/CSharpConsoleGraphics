@@ -56,6 +56,7 @@
     <Compile Include="STR_Application\Base\STR_ConfigPackage.cs" />
     <Compile Include="STR_Application\Base\STR_ConsoleApplicationConfig.cs" />
     <Compile Include="STR_Application\Base\STR_ConsoleConfigPackage.cs" />
+    <Compile Include="STR_Application\Base\STR_ConsoleWindow.cs" />
     <Compile Include="STR_Application\Base\STR_Window.cs" />
     <Compile Include="STR_Application\Extensions\STR_ConsoleSuppport\NATIVE_FLAGS.cs" />
     <Compile Include="STR_Application\Extensions\STR_ConsoleSuppport\NATIVE_METHODS.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="STR_Engine\Base\STR_DefaultEngineConfig.cs" />
     <Compile Include="STR_Engine\Extensions\STR_StopwatchExtensions.cs" />
     <Compile Include="STR_Entities\Components\FastDrawableEntity.cs" />
+    <Compile Include="STR_Entities\Components\NewDrawableEntity.cs" />
     <Compile Include="STR_Entities\Extensions\STR_UpdateableEntity.cs" />
     <Compile Include="STR_Entities\Components\EmptyEntity.cs" />
     <Compile Include="STR_Entities\Components\EntityCollection.cs" />
@@ -82,6 +84,13 @@
     <Compile Include="STR_Application\Extensions\STR_ConsoleSuppport\NATIVE_CONSOLE_CONFIG.cs" />
     <Compile Include="STR_Engine\Components\TestEngine.cs" />
     <Compile Include="STR_Entities\Extensions\STR_WriteableBitmapExtensions.cs" />
+    <Compile Include="TetrisTest\STR_Bitmap.cs" />
+    <Compile Include="TetrisTest\STR_GridComponent.cs" />
+    <Compile Include="TetrisTest\STR_PixelBuffer_GEN.cs" />
+    <Compile Include="TetrisTest\STR_PixelBuffer_BYTES.cs" />
+    <Compile Include="TetrisTest\STR_PixelBuffer_DWORDS.cs" />
+    <Compile Include="TetrisTest\STR_PixelBuffer_WORDS.cs" />
+    <Compile Include="Utilites\STR_Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

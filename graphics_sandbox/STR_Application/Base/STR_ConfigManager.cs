@@ -40,7 +40,7 @@ namespace STR_GraphicsLib.STR_ApplicationSupport
 
         public static STR_ApplicationConfig BuildFromConfigPackage ( STR_ConfigPackage strcpConfigPackage, STR_ConfigMode estrscMode , STR_ConfigStatus estrcsStatus )
         {
-            return NewConfig ( strcpConfigPackage.WindowTitle, strcpConfigPackage.WindowWidthPx, strcpConfigPackage.WindowHeightPx , estrscMode , estrcsStatus );
+            return NewConfig ( strcpConfigPackage.Title, strcpConfigPackage.WidthPx, strcpConfigPackage.HeightPx , estrscMode , estrcsStatus );
         }
     }
 }

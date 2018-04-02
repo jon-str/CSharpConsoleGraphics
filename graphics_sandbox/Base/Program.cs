@@ -13,10 +13,6 @@ namespace STR_GraphicsLib_TEST
 {
     public class Program
     {
-
-        static void Main ( )
-        { 
-            STR_Application.GraphicsEngine.Start ( );
-        }
+        static void Main ( string[] args ) => STR_Application.GraphicsEngine.Start ( );
     }
 }

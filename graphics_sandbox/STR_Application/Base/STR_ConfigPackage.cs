@@ -10,21 +10,21 @@ namespace STR_GraphicsLib.STR_ApplicationSupport
 {
     public class STR_ConfigPackage
     {
-        protected string msWindowTitle = string.Empty;
+        protected string    msWindowTitle       = string.Empty;
 
-        protected int miWindowWidthPx = 0;
-        protected int miWindowHeightPx = 0;
+        protected int       miWindowWidthPx     = 0;
+        protected int       miWindowHeightPx    = 0;
 
         public STR_ConfigPackage ( string sWindowTitle , int iWindowWidthPx , int iWindowHeightPx )
         {
-            msWindowTitle = sWindowTitle;
+            msWindowTitle       = sWindowTitle;
 
-            miWindowWidthPx = iWindowWidthPx;
-            miWindowHeightPx = iWindowHeightPx;
+            miWindowWidthPx     = iWindowWidthPx;
+            miWindowHeightPx    = iWindowHeightPx;
         }
 
-        public string WindowTitle { get => msWindowTitle; }
-        public int WindowWidthPx { get => miWindowWidthPx; }
-        public int WindowHeightPx { get => miWindowHeightPx; }
+        public string Title { get => msWindowTitle; }
+        public int WidthPx { get => miWindowWidthPx; }
+        public int HeightPx { get => miWindowHeightPx; }
     }
 }

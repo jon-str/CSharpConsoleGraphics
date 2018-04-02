@@ -13,8 +13,8 @@ namespace STR_GraphicsLib.STR_Engine
 {
     public abstract class STR_Engine
     {
-        protected bool          mbIsRunning = false;
-        protected STR_Window    mstrWindow  = null;
+        protected bool mbIsRunning = false;
+        protected STR_Window mstrWindow = null;
 
         private STR_EntitySupport.EntityCollection moecEntities = null;
 
@@ -24,7 +24,6 @@ namespace STR_GraphicsLib.STR_Engine
             {
                 return;
             }
-            //STR_ConsoleSupport.NATIVE_CONSOLE.SetWindowSize ( 1024 , 768 );
 
             this.AttachWindow ( );
 
@@ -52,7 +51,7 @@ namespace STR_GraphicsLib.STR_Engine
 
         public abstract STR_Window AttachWindow ( );
 
-        public STR_Window AttachedWindow { get => mstrWindow;  }
+        public STR_Window Window { get => mstrWindow; }
 
         protected STR_EntitySupport.EntityCollection Entities
         {

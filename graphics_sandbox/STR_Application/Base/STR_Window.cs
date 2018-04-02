@@ -10,48 +10,33 @@ using System.Drawing;
 
 namespace STR_GraphicsLib.STR_ApplicationSupport
 {
-    public class STR_Window
+    public class STR_Window : STR_ConfigPackage
     {
         protected Graphics mogGraphics;
 
-        private string msWindowTitle;
+        //private string msWindowTitle;
 
-        private int miWindowWidth;
-        private int miWindowHeight;
+        //private int miWindowWidth;
+        //private int miWindowHeight;
 
         private int miLastWindowWidth;
         private int miLastWindowHeight;
 
-        public STR_Window(string sWindowTitle, int iWdith, int iHeight)
+        public STR_Window(string sWindowTitle, int iWindowWidthPx , int iHeigiWindowHeightPxht ) : base(sWindowTitle, iWindowWidthPx , iHeigiWindowHeightPxht )
         {
             msWindowTitle = sWindowTitle;
 
-            miWindowWidth = iWdith;
-            miWindowHeight = iHeight;
+            miWindowWidthPx = iWindowWidthPx;
+            miWindowHeightPx = iHeigiWindowHeightPxht;
 
-            miLastWindowWidth = miWindowWidth;
-            miLastWindowHeight = miWindowHeight;
+            miLastWindowWidth = miWindowWidthPx;
+            miLastWindowHeight = miWindowHeightPx;
         }
 
         public Graphics GraphicsContext { get => mogGraphics; }
-
-        public string Title { get => msWindowTitle; }
-
-        public int Width { get => miWindowWidth; }
-        public int Height { get => miWindowHeight; }
 
         public int LastWidth { get => miLastWindowWidth; }
         public int LastHeight { get => miLastWindowHeight; }
     }
 
-    public class STR_ConsoleWindow : STR_Window
-    {
-
-        public STR_ConsoleWindow ( STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG nccConfig ) : base ( nccConfig.WindowTitle , nccConfig.WindowWidthPx , nccConfig.WindowHeightPx )
-        {
-            STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG nccConsoleConfig; //= //new STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG ( "TEST" , 640 , 640 );
-
-            mogGraphics = nccConfig.GraphicsContext;
-        }
-    }
 }

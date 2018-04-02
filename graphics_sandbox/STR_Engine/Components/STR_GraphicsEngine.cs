@@ -17,19 +17,21 @@ namespace STR_GraphicsLib.STR_Engine
     {
         private STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG monccConsoleConfig;
 
-        //public STR_GraphicsEngine () : this (string.Empty, 0, 0) { }
+        private Stopwatch moswStopwatch;
 
-        public STR_GraphicsEngine(string sWindowTitle , int iWindowWidthPx, int iWindowHeightPx)
+        public STR_GraphicsEngine ( string sWindowTitle , int iWindowWidthPx , int iWindowHeightPx )
         {
-            monccConsoleConfig = new STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG ( sWindowTitle , iWindowWidthPx , iWindowHeightPx, false );
+            monccConsoleConfig = new STR_ConsoleSupport.NATIVE_CONSOLE_CONFIG ( sWindowTitle , iWindowWidthPx , iWindowHeightPx , false );
+            moswStopwatch = new Stopwatch ( );
         }
 
-        public STR_GraphicsEngine ( STR_ConfigPackage strcpConfigPackage ) : this ( strcpConfigPackage.WindowTitle , strcpConfigPackage.WindowWidthPx , strcpConfigPackage.WindowHeightPx ) {; }
+        public STR_GraphicsEngine ( STR_ConfigPackage strcpConfigPackage ) : this ( strcpConfigPackage.Title , strcpConfigPackage.WidthPx , strcpConfigPackage.HeightPx ) {; }
 
         public override bool Init ( )
         {
             this.Entities = new STR_EntitySupport.EntityCollection ( );
-            this.Entities.Add ("en_TEST_ENTITY",  new STR_EntitySupport.TestEntity ( ) );
+            //this.Entities.Add ("en_TEST_ENTITY",  new STR_EntitySupport.TestEntity ( ) );
+            this.Entities.Add ( "en_TEST_ENTITY_2" , new STR_EntitySupport.NewDrawableEntity ( ) );
 
             return ( this.Entities.Size > 0 ) ? true : false;
         }
@@ -42,24 +44,22 @@ namespace STR_GraphicsLib.STR_Engine
         }
 
         public override void Run ( )
-        {
-            Stopwatch oStopwatch = new Stopwatch ( );
-            oStopwatch.Start ( );
+        {          
+            moswStopwatch.Start ( );
 
             int iFrames = 0;
+            int iTickCount = 0;
 
             double dUnprocessedSeconds = 0;
-
-            long lLastTime = oStopwatch.ElapsedNanoSeconds ( );
-
             double dSecondsPerTick = 1 / 60.0;
 
-            int iTickCount = 0;
+            long lLastTime = moswStopwatch.ElapsedNanoSeconds ( );
 
             while(this.IsRunning)
             {
-                long lNow = oStopwatch.ElapsedNanoSeconds (  );
+                long lNow = moswStopwatch.ElapsedNanoSeconds (  );
                 long lPassedTime = lNow - lLastTime;
+
                 lLastTime = lNow;
 
                 if(lPassedTime < 0)

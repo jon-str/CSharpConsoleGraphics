@@ -30,7 +30,7 @@ namespace STR_GraphicsLib.STR_EntityComponents
 
             private Random rnd;
 
-            public TestEntity ( ) : base ( )
+            public TestEntity ( ) : base ()
             {
                 byarrPixelBuffer = Enumerable.Repeat<byte> ( (byte) 0x00, mciPixelBufferSize ).ToArray();
                 miDelta = 10;
@@ -72,29 +72,22 @@ namespace STR_GraphicsLib.STR_EntityComponents
                     }
                 }
 
-
                 Marshal.Copy ( byarrPixelBuffer , 0 , iPtr, byarrPixelBuffer.Length );
 
                 mbmBitmap.UnlockBits ( bmdRawData );
 
-
-                this.GraphicsEngine.AttachedWindow.GraphicsContext.DrawImage ( mbmBitmap , 0 , 0 , mciWidth , mciHeight );
+                this.GraphicsEngine.Window.GraphicsContext.DrawImage ( mbmBitmap , 0 , 0 , mciWidth , mciHeight );
             }
 
-            public override void Update ( )
-            {
-                miDelta = (miDelta >= 0x100) ? 0 : miDelta + 1;
-                
-            }
+            public override void Update ( ) => miDelta = ( miDelta >= 0x100 ) ? 0 : miDelta + 1;
 
-            public static Image ImageFromByteArray ( byte [ ] byarrSource )
-            {
-                using ( MemoryStream oMemStream = new MemoryStream ( byarrSource ) )
-                {
-                    return new Bitmap(oMemStream);
-                }
-
-            }
+            //public static Image ImageFromByteArray ( byte [ ] byarrSource )
+            //{
+            //    using ( MemoryStream oMemStream = new MemoryStream ( byarrSource ) )
+            //    {
+            //        return new Bitmap(oMemStream);
+            //    }
+            //}
         }
     }
 }
