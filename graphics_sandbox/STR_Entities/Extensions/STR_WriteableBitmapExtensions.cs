@@ -8,7 +8,7 @@ using System.Windows;
 using System.Drawing;
 using System.IO;
 
-namespace graphics_sandbox.STR_Entities.Extensions
+namespace STR_GraphicsLib.STR_Entities.Extensions
 {
     public static class STR_WriteableBitmapExtensions
     {
@@ -22,7 +22,7 @@ namespace graphics_sandbox.STR_Entities.Extensions
 
         public static void FromByteArray ( this WriteableBitmap wbBitmap , byte [ ] byarrRawData, int iWidth , int iHeight )
         {
-            wbBitmap.WritePixels ( new Int32Rect ( 0 , 0 , iWidth , iHeight ) , byarrRawData , 4 , 0 );
+            wbBitmap.WritePixels ( new Int32Rect ( 0 , 0 , iWidth , iHeight ) , byarrRawData , STR_Buffer.STRIDE.BYTE , 0 );
             //Buffer.BlockCopy ( buffer , 0 , bmp.Pixels , 0 , buffer.Length );
         }
     }

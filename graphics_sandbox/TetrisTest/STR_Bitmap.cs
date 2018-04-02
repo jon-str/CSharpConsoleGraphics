@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,14 @@ namespace STR_Games.TetrisTest
         protected int miWidthPx;
         protected int miHeightPx;
 
-        protected int miTotalPixels;
+        protected int miBufferSize;
 
-        protected int miPixelBufferStride;
+        protected int miBufferStride;
 
         protected STR_PixelBuffer_GEN<T> m_strpb_gen_PixelBuffer;
+
+        protected Bitmap mbmBitmap;
+        protected Rectangle mrBitmapRect;
 
         public STR_Bitmap ( int iWidthPx , int iHeightPx ) : this ( iWidthPx , iHeightPx , 1 ) {; }
 
@@ -27,30 +31,33 @@ namespace STR_Games.TetrisTest
             miWidthPx = iWidthPx;
             miHeightPx = iHeightPx;
 
-            miTotalPixels = miWidthPx * miHeightPx * iStride;
+            mbmBitmap = new Bitmap ( miWidthPx, miHeightPx );
+            mrBitmapRect = new Rectangle ( 0 , 0 , mbmBitmap.Width , mbmBitmap.Height );
 
-            m_strpb_gen_PixelBuffer = new STR_PixelBuffer_GEN<T> ( miTotalPixels );
+            miBufferStride = iStride;
+            miBufferSize = miWidthPx * miHeightPx * miBufferStride;
+
+            m_strpb_gen_PixelBuffer = new STR_PixelBuffer_GEN<T> ( miBufferSize );
         }
 
-        public STR_Bitmap ( STR_Engine streEngine , int iBufferSize )
-        {
-            miWidthPx = streEngine.Window.WidthPx;
-            miHeightPx = streEngine.Window.HeightPx;
+        //public STR_Bitmap ( STR_Engine streEngine , int iBufferSize )
+        //{
+        //    miWidthPx = streEngine.Window.WidthPx;
+        //    miHeightPx = streEngine.Window.HeightPx;
 
-            miTotalPixels = iBufferSize;
+        //    miBufferSize = iBufferSize;
 
-            m_strpb_gen_PixelBuffer = new STR_PixelBuffer_GEN<T> ( iBufferSize );
-        }
+        //    m_strpb_gen_PixelBuffer = new STR_PixelBuffer_GEN<T> ( iBufferSize );
+        //}
 
         public STR_Bitmap ( STR_Bitmap<T> strbmBitmap )
         {
             miWidthPx = strbmBitmap.miWidthPx;
             miHeightPx = strbmBitmap.miHeightPx;
 
-            miTotalPixels = strbmBitmap.miWidthPx * strbmBitmap.miHeightPx;
-            //miTotalPixels = strbmBitmap.TotalPixels; 
+            miBufferSize = strbmBitmap.miWidthPx * strbmBitmap.miHeightPx;
 
-            if ( miTotalPixels != strbmBitmap.miTotalPixels )
+            if ( miBufferSize != strbmBitmap.miBufferSize )
             {
                 throw new Exception ( "ERR" ); //TODO: write this message
             }
@@ -198,16 +205,28 @@ namespace STR_Games.TetrisTest
         public STR_PixelBuffer_GEN<T> BufferObject { get => m_strpb_gen_PixelBuffer; }
 
         public T GetPixelAtCoord ( int iX , int iY ) => m_strpb_gen_PixelBuffer [ CoordToPixelBufferIndex ( iX , iY ) ];
-        public T SetPixelAtCoord ( int iX , int iY , T gen_Color ) => m_strpb_gen_PixelBuffer [ CoordToPixelBufferIndex ( iX , iY ) ] = gen_Color;
+        public void SetPixelAtCoord ( int iX , int iY , T gen_Color ) => m_strpb_gen_PixelBuffer [ CoordToPixelBufferIndex ( iX , iY ) ] = gen_Color;
+
+        public void SetPixelAtCoordInByteArray ( int iX , int iY , int iColor )
+        {
+            int iIndex = CoordToPixelBufferIndex ( iX , iY, STR_Buffer.STRIDE.BYTE ) ;
+
+            T gen_color = STR_Utilities.GenericCast<int , T>.Do ( iIndex );
+        }
 
         public int CoordToPixelBufferIndex ( int iX , int iY ) => STR_Utilities.Access1DArrayAs2D ( iX , iY , miWidthPx );
+
+        public int CoordToPixelBufferIndex ( int iX , int iY, int iStride ) => (STR_Utilities.Access1DArrayAs2D ( iX , iY , miWidthPx ) * iStride);
 
         public int WidthPx { get => miWidthPx; }
         public int HeightPx { get => miHeightPx; }
 
-        public int PixelBufferStride { get => miPixelBufferStride; }
+        public int BufferStride { get => miBufferStride; }
 
-        public int TotalPixels { get => miTotalPixels; }
+        public int BufferSize { get => miBufferSize; }
+
+        public Bitmap InternalMap { get => mbmBitmap; }
+        public Rectangle SizeRect { get => mrBitmapRect; }
     }
 }
 

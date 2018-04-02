@@ -21,6 +21,9 @@ namespace STR_GraphicsLib.STR_EntityComponents
 
             private const int mciPixelBufferSize = mciWidth * mciHeight * mciBufferByteStride;
 
+            //protected Bitmap mbmBitmap;
+            //protected Rectangle mrBitmapRect;
+
             private Random rnd;
 
             public FastDrawableEntity ( ) : base ( mciWidth , mciHeight, mciBufferByteStride )
@@ -29,8 +32,8 @@ namespace STR_GraphicsLib.STR_EntityComponents
                 miDelta = 10;
                 rnd = new Random ( );
 
-                mbmBitmap = new Bitmap ( mciWidth , mciHeight );
-                mrScreenRect = new Rectangle ( 0 , 0 , mbmBitmap.Width , mbmBitmap.Height );
+               // mbmBitmap = new Bitmap ( mciWidth , mciHeight );
+                //mrBitmapRect = new Rectangle ( 0 , 0 , mbmBitmap.Width , mbmBitmap.Height );
             }
 
             public FastDrawableEntity ( int iWidthPx , int iHeightPx ) : base ( iWidthPx , iHeightPx )
@@ -39,12 +42,10 @@ namespace STR_GraphicsLib.STR_EntityComponents
 
             public override void Draw ( )
             {
-                BitmapData bmdRawData = mbmBitmap.LockBits ( mrScreenRect , ImageLockMode.ReadWrite , PixelFormat.Format32bppArgb );
+                BitmapData bmdRawData = mstrbmCanvas.InternalMap.LockBits ( mstrbmCanvas.SizeRect , ImageLockMode.ReadWrite , PixelFormat.Format32bppArgb );
                 IntPtr iPtr = bmdRawData.Scan0;
 
                 int iBytes = Math.Abs ( bmdRawData.Stride ) * bmdRawData.Height;
-                int iTest = byarrPixelBuffer.Length;
-                { };
 
                 Marshal.Copy(iPtr, byarrPixelBuffer, 0, byarrPixelBuffer.Length);
 
@@ -52,7 +53,7 @@ namespace STR_GraphicsLib.STR_EntityComponents
                 {
                     for ( int x = 0 ; x < mciWidth ; x++ )
                     {
-                        int iPixelIndex = ( y * mciWidth + x ) * 4;
+                        int iPixelIndex = ( y * mciWidth + x ) * STR_Buffer.STRIDE.BYTE;
 
                         byte byR = ( byte ) ( ( ( x + miDelta ) % 0x100 ) ^ ( ( y + miDelta ) % 0x100 ) );
                         byte byG = ( byte ) ( ( ( 2 * x + miDelta ) % 0x100 ) ^ ( ( 2 * y + miDelta ) % 0x100 ) );
@@ -69,9 +70,9 @@ namespace STR_GraphicsLib.STR_EntityComponents
 
                 Marshal.Copy ( byarrPixelBuffer , 0 , iPtr, byarrPixelBuffer.Length );
 
-                mbmBitmap.UnlockBits ( bmdRawData );
+                mstrbmCanvas.InternalMap.UnlockBits ( bmdRawData );
 
-                this.GraphicsEngine.Window.GraphicsContext.DrawImage ( mbmBitmap , 0 , 0 , mciWidth , mciHeight );
+                this.GraphicsEngine.Window.GraphicsContext.DrawImage ( mstrbmCanvas.InternalMap , 0 , 0 , mciWidth , mciHeight );
             }
 
             public override void Update ( ) => miDelta = ( miDelta >= 0x100 ) ? 0 : miDelta + 1;

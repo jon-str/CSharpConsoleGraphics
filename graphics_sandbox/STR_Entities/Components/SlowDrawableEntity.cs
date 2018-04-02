@@ -21,20 +21,20 @@ namespace STR_GraphicsLib.STR_EntityComponents
 
             public override void Draw ( )
             {
-                BitmapData bmdRawData = mbmBitmap.LockBits ( mrScreenRect , ImageLockMode.ReadWrite , PixelFormat.Format32bppArgb );
+                BitmapData bmdRawData = mstrbmCanvas.InternalMap.LockBits ( mstrbmCanvas.SizeRect , ImageLockMode.ReadWrite , PixelFormat.Format32bppArgb );
                 IntPtr iPtr = bmdRawData.Scan0;
 
                 int iBytes = Math.Abs ( bmdRawData.Stride ) * bmdRawData.Height;
-                int iTest = mstrbmCanvas.TotalPixels;
+                int iTest = mstrbmCanvas.BufferSize;
                 { };
 
-                Marshal.Copy ( iPtr , mstrbmCanvas.BufferArray , 0 , mstrbmCanvas.TotalPixels );
+                Marshal.Copy ( iPtr , mstrbmCanvas.BufferArray , 0 , mstrbmCanvas.BufferSize );
 
                 for ( int y = 0 ; y < mstrbmCanvas.HeightPx ; y++ )
                 {
                     for ( int x = 0 ; x < mstrbmCanvas.WidthPx ; x++ )
                     {
-                        int iPixelIndex = ( y * mstrbmCanvas.WidthPx + x ) * 4;
+                        int iPixelIndex = ( y * mstrbmCanvas.WidthPx + x ) * STR_Buffer.STRIDE.BYTE;
 
                         byte byR = ( byte ) ( ( ( x + miDelta ) % 0x100 ) ^ ( ( y + miDelta ) % 0x100 ) );
                         byte byG = ( byte ) ( ( ( 2 * x + miDelta ) % 0x100 ) ^ ( ( 2 * y + miDelta ) % 0x100 ) );
@@ -49,11 +49,11 @@ namespace STR_GraphicsLib.STR_EntityComponents
                     }
                 }
 
-                Marshal.Copy ( mstrbmCanvas.BufferArray , 0 , iPtr , mstrbmCanvas.TotalPixels );
+                Marshal.Copy ( mstrbmCanvas.BufferArray , 0 , iPtr , mstrbmCanvas.BufferSize );
 
-                mbmBitmap.UnlockBits ( bmdRawData );
+                mstrbmCanvas.InternalMap.UnlockBits ( bmdRawData );
 
-                this.GraphicsEngine.Window.GraphicsContext.DrawImage ( mbmBitmap , 0 , 0 , mstrbmCanvas.WidthPx , mstrbmCanvas.HeightPx );
+                this.GraphicsEngine.Window.GraphicsContext.DrawImage ( mstrbmCanvas.InternalMap , 0 , 0 , mstrbmCanvas.WidthPx , mstrbmCanvas.HeightPx );
             }
 
             public override void Update ( ) => miDelta = ( miDelta >= 0x100 ) ? 0x00 : miDelta + 1;

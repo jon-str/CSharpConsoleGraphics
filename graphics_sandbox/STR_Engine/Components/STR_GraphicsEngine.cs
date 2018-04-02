@@ -30,7 +30,9 @@ namespace STR_GraphicsLib.STR_Engine
         public override bool Init ( )
         {
             this.Entities = new STR_EntitySupport.EntityCollection ( );
+
             this.Entities.Add ("en_TEST_ENTITY",  new STR_EntitySupport.FastDrawableEntity ( ) );
+
             //this.Entities.Add ( "en_TEST_ENTITY_2" , new STR_EntitySupport.SlowDrawableEntity ( ) );
 
             return ( this.Entities.Size > 0 ) ? true : false;

@@ -15,15 +15,12 @@ namespace STR_GraphicsLib.STR_EntityComponents
         {
             protected STR_Bitmap<byte> mstrbmCanvas;
 
-            //BYTE STRIDE, 4 BYTES PER DWORD
-            protected const int mciBufferByteStride = 4;
+            //BYTE STRIDE, STR_Buffer.STRIDE.BYTE BYTES PER DWORD
+            protected const int mciBufferByteStride = STR_Buffer.STRIDE.BYTE;
 
             protected int miPixelBufferSize;
 
             protected int miDelta;
-
-            protected Bitmap mbmBitmap;
-            protected Rectangle mrScreenRect;
 
             protected Random mRandom;
 
@@ -34,14 +31,12 @@ namespace STR_GraphicsLib.STR_EntityComponents
                 miPixelBufferSize = iWidthPx * iHeightPx * iStride;
 
                 mstrbmCanvas = new STR_Bitmap<byte> ( iWidthPx , iHeightPx , mciBufferByteStride );
-                mbmBitmap = new Bitmap ( mstrbmCanvas.WidthPx , mstrbmCanvas.HeightPx );
-                mrScreenRect = new Rectangle ( 0 , 0 , mbmBitmap.Width , mbmBitmap.Height );
 
                 miDelta = 10;
                 mRandom = new Random ( );
             }
-            //public STR_Bitmap<byte> Canvas { get => mstrbmCanvas; }
-            //public Bitmap Map { get => mbmBitmap; }
+            public STR_Bitmap<byte> Canvas { get => mstrbmCanvas; }
+            //public Bitmap InternalMap { get => mstrbmCanvas.InternalMap; }
         }
     }
 }
